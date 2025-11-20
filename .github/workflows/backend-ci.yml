@@ -38,6 +38,13 @@ jobs:
       run: |
         docker push "$IMAGE"
 
+     - name: Install oc CLI
+      run: |
+        curl -L https://mirror.openshift.com/pub/openshift-v4/clients/ocp/latest/openshift-client-linux.tar.gz -o oc.tar.gz
+        tar -xvf oc.tar.gz
+        sudo mv oc kubectl /usr/local/bin/
+        oc version
+       
     - name: Login no OpenShift
       uses: redhat-actions/oc-login@v1
       with:
