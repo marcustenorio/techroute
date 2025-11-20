@@ -30,7 +30,7 @@ jobs:
 
     - name: Build da imagem Backend
       run: |
-        IMAGE="ghcr.io/${{ secrets.GHCR_USERNAME }}/techroute-backend:${{ github.sha }}"
+        IMAGE="ghcr.io/${{ github.actor }}/techroute-backend:${{ github.sha }}" 
         docker build -t "$IMAGE" backend
         echo "IMAGE=$IMAGE" >> $GITHUB_ENV
 
