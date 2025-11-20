@@ -38,7 +38,7 @@ jobs:
       run: |
         docker push "$IMAGE"
 
-     - name: Install oc CLI
+    - name: Install oc CLI
       run: |
         curl -L https://mirror.openshift.com/pub/openshift-v4/clients/ocp/latest/openshift-client-linux.tar.gz -o oc.tar.gz
         tar -xvf oc.tar.gz
