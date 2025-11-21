@@ -28,27 +28,16 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
 
-    # -------------------------------
-    # BUILD + TAG :latest + TAG :sha
-    # -------------------------------
     - name: Build da imagem Backend
       run: |
-        IMAGE_SHA="ghcr.io/${{ github.actor }}/techroute-backend:${{ github.sha }}"
-        IMAGE_LATEST="ghcr.io/${{ github.actor }}/techroute-backend:latest"
-
-        echo "IMAGE_SHA=$IMAGE_SHA" >> $GITHUB_ENV
-        echo "IMAGE_LATEST=$IMAGE_LATEST" >> $GITHUB_ENV
-
-        docker build -t "$IMAGE_SHA" -t "$IMAGE_LATEST" backend
+        IMAGE="ghcr.io/${{ github.actor }}/techroute-backend:${{ github.sha }}" 
+        docker build -t "$IMAGE" backend
+        echo "IMAGE=$IMAGE" >> $GITHUB_ENV
 
     - name: Push da imagem para GHCR
       run: |
-        docker push "$IMAGE_SHA"
-        docker push "$IMAGE_LATEST"
+        docker push "$IMAGE"
 
-    # -------------------------------
-    # INSTALA OC
-    # -------------------------------
     - name: Install oc CLI
       run: |
         curl -L https://mirror.openshift.com/pub/openshift-v4/clients/ocp/latest/openshift-client-linux.tar.gz -o oc.tar.gz
@@ -57,10 +46,7 @@ jobs:
         sudo mv kubectl /usr/local/bin/kubectl
         sudo chmod +x /usr/local/bin/oc /usr/local/bin/kubectl
         oc version --client
-
-    # -------------------------------
-    # LOGIN NO OPENSHIFT
-    # -------------------------------
+ 
     - name: Login no OpenShift
       uses: redhat-actions/oc-login@v1
       with:
@@ -68,15 +54,12 @@ jobs:
         openshift_token: ${{ secrets.OC_TOKEN }}
         insecure_skip_tls_verify: true
 
-    # -------------------------------
-    # ATUALIZA O DEPLOYMENT
-    # SEMPRE APONTANDO PARA :latest
-    # -------------------------------
     - name: Atualizar Deployment no OpenShift
       run: |
         oc project ${{ secrets.OC_NAMESPACE }}
-        oc set image deployment/backend backend="$IMAGE_LATEST" --record
+        oc set image deployment/backend backend="$IMAGE" --record
 
     - name: Aguardar rollout
       run: |
         oc rollout status deployment/backend
+
