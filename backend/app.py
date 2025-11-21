@@ -33,6 +33,27 @@ def root():
 # -----------------------------
 # Health Check simples
 # -----------------------------
+
+@app.get("/db-init")
+def db_init():
+    try:
+        conn = get_db_connection()
+        cur = conn.cursor()
+
+        script_path = os.path.join(os.path.dirname(__file__), "db_init.sql")
+        with open(script_path, "r") as f:
+            sql_commands = f.read()
+
+        cur.execute(sql_commands)
+        conn.commit()
+
+        cur.close()
+        conn.close()
+        return {"status": "ok", "message": "Tabelas criadas com sucesso"}
+    except Exception as e:
+        return {"error": str(e)}
+
+
 @app.get("/health")
 def health():
     return {"status": "ok"}
