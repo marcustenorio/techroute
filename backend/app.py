@@ -13,3 +13,4 @@ app.include_router(dashboard.router)
 def root():
     return {"status": "OK", "message": "API de Visitas Técnicas funcionando."}
 # trigger
+# pipeline test
