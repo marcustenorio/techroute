@@ -1,10 +1,10 @@
 FROM python:3.11-slim
 
-# Instalar dependências de sistema necessárias para FastAPI/Uvicorn funcionar por trás do HAProxy do OpenShift
+# Instalar ferramentas básicas para debugging e health-checks
 RUN apt-get update && apt-get install -y \
     curl \
     wget \
-    netcat \
+    netcat-openbsd \
     iputils-ping \
     ca-certificates \
     libnss3 \
