@@ -12,3 +12,4 @@ app.include_router(dashboard.router)
 @app.get("/")
 def root():
     return {"status": "OK", "message": "API de Visitas Técnicas funcionando."}
+# trigger
