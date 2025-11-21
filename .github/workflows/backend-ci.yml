@@ -50,8 +50,8 @@ jobs:
     - name: Login no OpenShift
       uses: redhat-actions/oc-login@v1
       with:
-        server_url: ${{ secrets.OC_SERVER }}
-        token: ${{ secrets.OC_TOKEN }}
+        openshift_server_url: ${{ secrets.OC_SERVER }}
+        openshift_token: ${{ secrets.OC_TOKEN }}
         insecure_skip_tls_verify: true
 
     - name: Atualizar Deployment no OpenShift
