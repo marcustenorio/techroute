@@ -1,12 +1,29 @@
 apiVersion: route.openshift.io/v1
 kind: Route
 metadata:
+  annotations:
+    openshift.io/host.generated: "true"
+  creationTimestamp: "2025-11-21T14:42:20Z"
   name: backend-route
+  namespace: mrogern-tenorio-dev
+  resourceVersion: "5267838041"
+  uid: 8d1f2b49-2d8a-4c2d-9a84-c39a2b0ab617
 spec:
+  host: backend-route-mrogern-tenorio-dev.apps.rm1.0a51.p1.openshiftapps.com
+  port:
+    targetPort: http
   to:
     kind: Service
     name: backend
-  port:
-    targetPort: http
-  tls:
-    termination: edge
+    weight: 100
+  wildcardPolicy: None
+status:
+  ingress:
+  - conditions:
+    - lastTransitionTime: "2025-11-21T14:42:20Z"
+      status: "True"
+      type: Admitted
+    host: backend-route-mrogern-tenorio-dev.apps.rm1.0a51.p1.openshiftapps.com
+    routerCanonicalHostname: router-default.apps.rm1.0a51.p1.openshiftapps.com
+    routerName: default
+    wildcardPolicy: None
