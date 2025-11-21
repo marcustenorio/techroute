@@ -5,9 +5,7 @@ metadata:
 spec:
   to:
     kind: Service
-    name: backend-service
+    name: backend
   port:
     targetPort: 8000
-  tls:
-    termination: edge
 
