@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 
-router = APIRouter(prefix="/status", tags=["status"])
+router = APIRouter(tags=["status"])
 
-@router.get("/")
+@router.get("/status")
 def get_status():
-    return {"message": "Rota status funcionando"}
+    return {"message": "Rota /status funcionando"}

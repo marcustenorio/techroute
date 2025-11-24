@@ -1,9 +1,26 @@
 from fastapi import FastAPI
 from routers import agendamentos, materiais, status, observacoes, dashboard
+from fastapi.middleware.cors import CORSMiddleware
 import os
 import psycopg2
 
 app = FastAPI(title="Gerenciamento de Visitas Técnicas")
+
+# CORS liberação
+origins = [
+    "*"
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+
+
 
 # -----------------------------
 # Função de conexão com Postgres
