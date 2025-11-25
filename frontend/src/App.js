@@ -1,33 +1,41 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from "react";
+import AgendamentoForm from "./components/AgendamentoForm";
 
-function App() {
-  const [status, setStatus] = useState("Carregando...");
+export default function App() {
+  const [ultimoAgendamento, setUltimoAgendamento] = useState(null);
 
-  useEffect(() => {
-    async function fetchStatus() {
-      try {
-        const apiUrl = window.RUNTIME_CONFIG.REACT_APP_API_URL;
-        console.log("→ Backend API URL:", apiUrl);
-
-        const response = await fetch(`${apiUrl}/status`);
-        const data = await response.json();
-        setStatus(JSON.stringify(data, null, 2));
-      } catch (error) {
-        console.error("Erro backend:", error);
-        setStatus("Erro ao conectar ao backend");
-      }
-    }
-
-    fetchStatus();
-  }, []);
+  function atualizarUltimo(dados) {
+    setUltimoAgendamento(dados);
+  }
 
   return (
     <div style={{ fontFamily: "Arial", padding: "20px" }}>
-      <h1>TechRoute Frontend</h1>
-      <h3>Status do Backend:</h3>
-      <pre>{status}</pre>
+      <h1 style={{ textAlign: "center", marginBottom: "20px" }}>
+        TechRoute – Agendamentos
+      </h1>
+
+      <AgendamentoForm onCreated={atualizarUltimo} />
+
+      {ultimoAgendamento && (
+        <div
+          style={{
+            marginTop: "30px",
+            padding: "20px",
+            background: "#0b1220",
+            borderRadius: "10px",
+            border: "1px solid #1e293b",
+            color: "#e2e8f0",
+            maxWidth: "720px",
+            marginLeft: "auto",
+            marginRight: "auto",
+          }}
+        >
+          <h3>Último Agendamento Criado:</h3>
+          <pre style={{ whiteSpace: "pre-wrap" }}>
+            {JSON.stringify(ultimoAgendamento, null, 2)}
+          </pre>
+        </div>
+      )}
     </div>
   );
 }
-
-export default App;
