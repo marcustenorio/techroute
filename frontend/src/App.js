@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 
 function App() {
   const [status, setStatus] = useState("Carregando...");
@@ -6,20 +6,14 @@ function App() {
   useEffect(() => {
     async function fetchStatus() {
       try {
-        const API_URL = window._env_?.REACT_APP_API_URL;
+        const apiUrl = window.RUNTIME_CONFIG.REACT_APP_API_URL;
+        console.log("→ Backend API URL:", apiUrl);
 
-        if (!API_URL) {
-          setStatus("API_URL não carregada (env.js vazio)");
-          return;
-        }
-
-        console.log("API_URL runtime:", API_URL);
-
-        const response = await fetch(`${API_URL}/status`);
+        const response = await fetch(`${apiUrl}/status`);
         const data = await response.json();
         setStatus(JSON.stringify(data, null, 2));
-      } catch (err) {
-        console.error("Erro fetch:", err);
+      } catch (error) {
+        console.error("Erro backend:", error);
         setStatus("Erro ao conectar ao backend");
       }
     }

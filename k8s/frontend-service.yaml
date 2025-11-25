@@ -3,9 +3,10 @@ kind: Service
 metadata:
   name: frontend
 spec:
+  ports:
+  - name: http
+    port: 80
+    targetPort: 8080   # CORRETO
   selector:
     app: frontend
-  ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 8080
+
