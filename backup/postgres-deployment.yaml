@@ -55,12 +55,11 @@ spec:
         - name: PGDATA
           value: /var/lib/postgresql/data/pgdata
         volumeMounts:
-        - name: postgres-storage
+        - name: postgres-data
           mountPath: /var/lib/postgresql/data
       volumes:
-      - name: postgres-storage
-        persistentVolumeClaim:
-          claimName: postgres-pvc
+      - name: postgres-data
+        emptyDir: {}
 
 ---
 apiVersion: v1
