@@ -58,7 +58,6 @@ jobs:
         sudo chmod +x /usr/local/bin/oc /usr/local/bin/kubectl
         oc version --client
 
-    # -----------------------------
     # LOGIN NO OPENSHIFT
     # -------------------------------
     - name: Login no OpenShift
