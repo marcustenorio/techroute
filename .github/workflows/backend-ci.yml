@@ -46,7 +46,6 @@ jobs:
         docker push "$IMAGE_SHA"
         docker push "$IMAGE_LATEST"
 
-    # -------------------------------
     # INSTALA OC
     # -------------------------------
     - name: Install oc CLI
