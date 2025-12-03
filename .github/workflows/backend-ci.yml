@@ -28,7 +28,6 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
 
-    # -------------------------------
     # BUILD + TAG :latest + TAG :sha
     # -------------------------------
     - name: Build da imagem Backend
