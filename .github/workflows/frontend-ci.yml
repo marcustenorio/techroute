@@ -45,4 +45,3 @@ jobs:
       run: |
         docker push "$IMAGE_SHA"
         docker push "$IMAGE_LATEST"
-#FIMM
