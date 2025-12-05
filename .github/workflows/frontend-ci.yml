@@ -1,5 +1,4 @@
 name: Frontend CI/CD
-# Inicio
 on:
   push:
     paths:
